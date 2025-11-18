@@ -76,7 +76,30 @@ body{
 .tagline{margin:.25rem 0 0;color:var(--text-700);font-size:0.95rem}
 
 .order-banner{margin:20px auto 0;padding:12px 20px;background:linear-gradient(135deg,var(--pink-100),var(--pink-50));border:1px solid var(--pink-200);border-radius:12px;max-width:90%;animation:fadeIn 1s ease 0.5s backwards}
-.order-banner p{margin:0;color:var(--text-900);font-size:0.95rem;font-weight:600;line-height:1.5}
+.order-banner p{margin:0 0 10px 0;color:var(--text-900);font-size:0.95rem;font-weight:600;line-height:1.5}
+
+/* Social media links container */
+.social-links{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+
+/* Social media buttons */
+.social-btn{display:inline-block;color:#fff;padding:.5rem .9rem;border-radius:999px;font-weight:700;text-decoration:none;border:1px solid rgba(0,0,0,0.04);font-size:0.9rem;transition:transform 0.2s ease, box-shadow 0.2s ease}
+.social-btn:hover{transform:translateY(-2px);box-shadow:0 4px 8px rgba(0,0,0,0.15)}
+.social-btn:active{transform:translateY(1px)}
+
+/* Brand-specific colors */
+.whatsapp-btn{background:#25D366}
+.whatsapp-btn:focus{outline:2px solid #fff;box-shadow:0 0 0 4px rgba(37,211,102,0.3)}
+
+.instagram-btn{background:linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)}
+.instagram-btn:focus{outline:2px solid #fff;box-shadow:0 0 0 4px rgba(220,39,67,0.3)}
+
+.facebook-btn{background:#1877F2}
+.facebook-btn:focus{outline:2px solid #fff;box-shadow:0 0 0 4px rgba(24,119,242,0.3)}
+
+@media (max-width:480px){
+  .social-btn{padding:.6rem 1rem;font-size:0.95rem}
+  .social-links{gap:8px}
+}
 
 @keyframes fadeSlideDown{
   from{opacity:0;transform:translateY(-20px)}
@@ -96,25 +119,25 @@ body{
 .product-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:20px;box-shadow:var(--shadow);overflow:hidden;animation:fadeSlideUp 0.6s ease forwards;opacity:0;transition:transform 0.3s ease, box-shadow 0.3s ease;height:100%;display:flex;flex-direction:column}
 
 /* Dual-image cards are wider */
-.product-card-dual{max-width:900px;margin:0 auto;width:100%}
+.product-card-dual{max-width:700px;margin:0 auto}
 
 /* Ensure side-by-side cards have equal heights */
 .product-row .product-card{height:100%}
 
 /* Dual-image product card layout */
 .product-images-row{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--card-border)}
-.product-images-row .product-img{min-height:350px;height:480px;position:relative;background:#fff;display:flex;align-items:center;justify-content:center}
+.product-images-row .product-img{min-height:280px;height:380px;position:relative;background:#fff;display:flex;align-items:center;justify-content:center}
 .product-images-row .product-img img{width:100%;height:100%;object-fit:contain}
 
 /* Clickable images in dual-image products */
 .product-img-clickable{display:block;appearance:none;background:none;border:0;padding:0;cursor:zoom-in;width:100%;height:100%}
-.product-img-clickable .product-img{min-height:350px}
+.product-img-clickable .product-img{min-height:280px}
 .product-img-clickable:hover{opacity:0.95}
 
 /* Mobile optimization for dual images */
 @media (max-width: 480px){
-  .product-images-row .product-img{min-height:220px;height:280px}
-  .product-img-clickable .product-img{min-height:220px}
+  .product-images-row .product-img{min-height:200px;height:240px}
+  .product-img-clickable .product-img{min-height:200px}
   .product-card-dual{max-width:100%}
 }
 
