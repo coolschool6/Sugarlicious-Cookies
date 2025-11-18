@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Sugarlicious Cookies — Custom‑Crafted Delights</title>
+		<meta name="description" content="Sugarlicious Cookies: a modern, mobile-first portfolio showcasing handcrafted sugar cookies with an interactive image lightbox." />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+		<link rel="stylesheet" href="css/styles.css" />
+	</head>
+	<body>
+		<a class="skip-link" href="#content">Skip to content</a>
+
+		<div class="scene-bg" aria-hidden="true"></div>
+
+		<div class="device-frame" role="region" aria-label="Sugarlicious Cookies portfolio">
+			<div class="device-topbar" aria-hidden="true">
+				<div class="dot"></div>
+				<div class="dot"></div>
+				<div class="dot"></div>
+			</div>
+
+			<main id="content" class="viewport" tabindex="-1">
+				<header class="header">
+					<h1 class="brand-title">Sugarlicious Cookies</h1>
+					<p class="tagline">Custom‑Crafted Delights</p>
+					<div class="notice" role="note">Minimum order: 10</div>
+				</header>
+
+				<section class="products" aria-label="Cookie products list">
+					<article class="product-card">
+						<button class="product-trigger" data-name="Pink Christmas" data-price="$100 per box" data-img="images/Pink Christmas.jpg" aria-label="Zoom Pink Christmas">
+							<div class="product-img">
+								<img src="images/Pink Christmas.jpg" alt="Pink Christmas cookie gift box with festive iced sugar cookies" loading="lazy" decoding="async" />
+							</div>
+						</button>
+						<div class="product-info">
+							<h2 class="product-name">Pink Christmas</h2>
+							<div class="product-price">$100 per box</div>
+						</div>
+					</article>
+
+					<article class="product-card">
+						<button class="product-trigger" data-name="Santa’s Toy Shop" data-price="$70" data-img="images/Santa's Toy shop.jpg" aria-label="Zoom Santa’s Toy Shop">
+							<div class="product-img">
+								<img src="images/Santa's Toy shop.jpg" alt="Santa’s Toy Shop themed sugar cookies arranged on a white plate" loading="lazy" decoding="async" />
+							</div>
+						</button>
+						<div class="product-info">
+							<h2 class="product-name">Santa’s Toy Shop</h2>
+							<div class="product-price">$70</div>
+						</div>
+					</article>
+
+					<article class="product-card">
+						<button class="product-trigger" data-name="Paint Your Own Cookies" data-price="$100 (5 pack)" data-img="images/Paint your Own Cookie.jpg" aria-label="Zoom Paint Your Own Cookies">
+							<div class="product-img">
+								<img src="images/Paint your Own Cookie.jpg" alt="Paint Your Own Cookies 5-pack with brush and palette" loading="lazy" decoding="async" />
+							</div>
+						</button>
+						<div class="product-info">
+							<h2 class="product-name">Paint Your Own Cookies</h2>
+							<div class="product-price">$100 (5 pack)</div>
+						</div>
+					</article>
+
+					<article class="product-card">
+						<button class="product-trigger" data-name="Personalized Gingerboy & Snowman" data-price="$155 (10)" data-img="images/Personalized Gingerboy and Snowman.jpg" aria-label="Zoom Personalized Gingerboy and Snowman">
+							<div class="product-img">
+								<img src="images/Personalized Gingerboy and Snowman.jpg" alt="Personalized Gingerboy and Snowman sugar cookies set of ten" loading="lazy" decoding="async" />
+							</div>
+						</button>
+						<div class="product-info">
+							<h2 class="product-name">Personalized Gingerboy & Snowman</h2>
+							<div class="product-price">$155 (10)</div>
+						</div>
+					</article>
+				</section>
+
+				<footer class="footer">
+					<p>Portfolio preview — inquiries via email or Instagram.</p>
+				</footer>
+			</main>
+
+			<div class="scrollbar-hint" aria-hidden="true"></div>
+		</div>
+
+		<div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Image preview">
+			<div class="lightbox-overlay" data-close></div>
+			<div class="lightbox-content" role="document">
+				<button class="lightbox-close" type="button" aria-label="Close preview" data-close>×</button>
+				<div class="lightbox-media">
+					<div class="ph" id="lightboxPh" aria-hidden="true"></div>
+					<img id="lightboxImg" alt="" hidden />
+				</div>
+				<div class="lightbox-info">
+					<div class="lightbox-name" id="lightboxName">Product</div>
+					<div class="lightbox-price" id="lightboxPrice">$0/dozen</div>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			const lightbox = document.getElementById('lightbox');
+			const phTarget = document.getElementById('lightboxPh');
+			const imgTarget = document.getElementById('lightboxImg');
+			const nameTarget = document.getElementById('lightboxName');
+			const priceTarget = document.getElementById('lightboxPrice');
+
+			const openLightbox = (name, price, phClass, imgSrc) => {
+				nameTarget.textContent = name;
+				priceTarget.textContent = price;
+				if (imgSrc) {
+					imgTarget.removeAttribute('hidden');
+					imgTarget.src = imgSrc;
+					phTarget.setAttribute('hidden','');
+				} else {
+					imgTarget.setAttribute('hidden','');
+					imgTarget.removeAttribute('src');
+					phTarget.removeAttribute('hidden');
+					phTarget.className = 'ph ' + phClass;
+				}
+				lightbox.removeAttribute('aria-hidden');
+				document.body.classList.add('no-scroll');
+			};
+			const closeLightbox = () => {
+				lightbox.setAttribute('aria-hidden', 'true');
+				document.body.classList.remove('no-scroll');
+			};
+
+			document.addEventListener('click', (e) => {
+				const trigger = e.target.closest('.product-trigger');
+				if (trigger) {
+					const name = trigger.getAttribute('data-name');
+					const price = trigger.getAttribute('data-price');
+					const ph = trigger.getAttribute('data-ph');
+					const img = trigger.getAttribute('data-img');
+					openLightbox(name, price, ph, img);
+				}
+				if (e.target.hasAttribute('data-close')) {
+					closeLightbox();
+				}
+			});
+			document.addEventListener('keydown', (e) => {
+				if (e.key === 'Escape' && lightbox.getAttribute('aria-hidden') !== 'true') {
+					closeLightbox();
+				}
+			});
+		</script>
+	</body>
+	</html>
+
