@@ -94,6 +94,11 @@ body{
 
 /* Ensure side-by-side cards have equal heights */
 .product-row .product-card{height:100%}
+
+/* Dual-image product card layout */
+.product-images-row{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--card-border)}
+.product-images-row .product-img{min-height:240px;aspect-ratio:1/1}
+.product-images-row .product-img img{width:100%;height:100%;object-fit:cover}
 .product-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover)}
 
 /* Animation delays for cards and rows */
