@@ -95,23 +95,27 @@ body{
 
 .product-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:20px;box-shadow:var(--shadow);overflow:hidden;animation:fadeSlideUp 0.6s ease forwards;opacity:0;transition:transform 0.3s ease, box-shadow 0.3s ease;height:100%;display:flex;flex-direction:column}
 
+/* Dual-image cards are wider */
+.product-card-dual{max-width:700px;margin:0 auto}
+
 /* Ensure side-by-side cards have equal heights */
 .product-row .product-card{height:100%}
 
 /* Dual-image product card layout */
 .product-images-row{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--card-border)}
-.product-images-row .product-img{min-height:200px;height:280px;position:relative;background:#fff;display:flex;align-items:center;justify-content:center}
+.product-images-row .product-img{min-height:280px;height:380px;position:relative;background:#fff;display:flex;align-items:center;justify-content:center}
 .product-images-row .product-img img{width:100%;height:100%;object-fit:contain}
 
 /* Clickable images in dual-image products */
 .product-img-clickable{display:block;appearance:none;background:none;border:0;padding:0;cursor:zoom-in;width:100%;height:100%}
-.product-img-clickable .product-img{min-height:200px}
+.product-img-clickable .product-img{min-height:280px}
 .product-img-clickable:hover{opacity:0.95}
 
 /* Mobile optimization for dual images */
 @media (max-width: 480px){
-  .product-images-row .product-img{min-height:160px;height:180px}
-  .product-img-clickable .product-img{min-height:160px}
+  .product-images-row .product-img{min-height:200px;height:240px}
+  .product-img-clickable .product-img{min-height:200px}
+  .product-card-dual{max-width:100%}
 }
 
 /* Image labels */
