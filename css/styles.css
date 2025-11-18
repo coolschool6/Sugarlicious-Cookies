@@ -131,6 +131,9 @@ body{
 .product-img{width:100%;min-height:240px;position:relative;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .product-img img{width:100%;height:auto;display:block;object-fit:cover;image-rendering:auto;max-height:380px;image-rendering:-webkit-optimize-contrast}
 .product-info{display:flex;align-items:baseline;justify-content:space-between;padding:1.1rem 1.2rem;gap:8px;flex-wrap:wrap}
+.product-info-stacked{flex-direction:column;align-items:flex-start;gap:6px}
+.product-info-stacked .product-price{font-size:1.2rem}
+.product-info-stacked .product-note{margin-left:0}
 .product-name{font-size:1.1rem;line-height:1.3;font-weight:600;color:var(--text-900);margin:0;font-family:Helvetica, Arial, sans-serif}
 .product-price{font-size:1.35rem;color:#8c2b5a;font-weight:800;letter-spacing:-0.02em}
 .product-note{font-size:.85rem;color:var(--text-500);margin-left:auto;font-weight:400;opacity:0.85}
