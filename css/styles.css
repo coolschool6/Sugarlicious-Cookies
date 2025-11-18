@@ -69,7 +69,7 @@ body{
 
 .header{display:grid;justify-items:center;text-align:center;margin:8px 0 16px}
 .brand-mark{display:grid;place-items:center}
-.brand-mark img{width:56px;max-width:20vw;height:auto;display:block;margin:4px auto 8px;object-fit:contain;image-rendering:auto}
+.brand-mark img{width:auto;max-width:90%;height:auto;display:block;margin:6px auto 10px;object-fit:contain;image-rendering:auto}
 .brand-title{font-family:"Great Vibes",cursive;font-size:clamp(2rem,8vw,2.6rem);line-height:1.1;margin:0;color:#1c1d20}
 .tagline{margin:.25rem 0 0;color:var(--text-700)}
 
@@ -77,8 +77,8 @@ body{
 .product-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
 .product-trigger{display:block;appearance:none;background:none;border:0;width:100%;cursor:zoom-in;padding:0;text-align:left}
 .product-trigger:focus-visible{outline:3px solid #0000;box-shadow:0 0 0 3px #fff, 0 0 0 6px #f8cfe0;border-radius:18px}
-.product-img{width:100%;aspect-ratio:4/3;position:relative;overflow:hidden;background:#fff}
-.product-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;image-rendering:auto}
+.product-img{width:100%;min-height:240px;position:relative;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center}
+.product-img img{width:100%;height:auto;display:block;object-fit:contain;image-rendering:auto;max-height:400px}
 .product-info{display:flex;align-items:baseline;justify-content:space-between;padding:1rem 1.1rem}
 .product-name{font-size:1.125rem;line-height:1.3;font-weight:600;color:var(--text-900);margin:0}
 .product-price{font-size:1.075rem;color:#8c2b5a;font-weight:700}
