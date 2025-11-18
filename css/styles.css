@@ -10,6 +10,9 @@
   --text-500:#6b7178;
   --offwhite:#f9fafb;
   --white:#ffffff;
+  --card-bg:#ffffff;
+  --card-border:rgba(255,182,203,.35);
+  --brand-pink:var(--pink-500);
   --shadow-lg:0 30px 60px rgba(231,111,148,.20), 0 10px 20px rgba(31,30,36,.08);
   --shadow:0 12px 28px rgba(31,30,36,.10), 0 2px 8px rgba(31,30,36,.06);
   --radius:24px;
@@ -21,7 +24,7 @@ html,body{height:100%}
 html{scroll-behavior:smooth}
 body{
   margin:0;
-  font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,Helvetica,sans-serif;
+  font-family:Helvetica, Arial, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Inter", sans-serif;
   color:var(--text-900);
   line-height:1.6;
   background:
@@ -64,21 +67,21 @@ body{
 .viewport::-webkit-scrollbar-thumb{background:#e9b8c8;border-radius:999px;border:2px solid #f2f3f4}
 .viewport{scrollbar-color:#e9b8c8 #f2f3f4;scrollbar-width:thin}
 
-.header{display:grid;justify-items:center;text-align:center;margin:4px 0 14px}
+.header{display:grid;justify-items:center;text-align:center;margin:8px 0 16px}
 .brand-mark{display:grid;place-items:center}
-.brand-mark img{width:64px;max-width:20vw;height:auto;display:block;margin:4px auto 6px}
+.brand-mark img{width:56px;max-width:20vw;height:auto;display:block;margin:4px auto 8px;object-fit:contain;image-rendering:auto}
 .brand-title{font-family:"Great Vibes",cursive;font-size:clamp(2rem,8vw,2.6rem);line-height:1.1;margin:0;color:#1c1d20}
 .tagline{margin:.25rem 0 0;color:var(--text-700)}
 
-.products{display:grid;gap:18px}
-.product-card{background:var(--white);border:1px solid rgba(255,182,203,.35);border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+.products{display:grid;gap:22px}
+.product-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
 .product-trigger{display:block;appearance:none;background:none;border:0;width:100%;cursor:zoom-in;padding:0;text-align:left}
 .product-trigger:focus-visible{outline:3px solid #0000;box-shadow:0 0 0 3px #fff, 0 0 0 6px #f8cfe0;border-radius:18px}
 .product-img{width:100%;aspect-ratio:4/3;position:relative;overflow:hidden;background:#fff}
 .product-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;image-rendering:auto}
-.product-info{display:flex;align-items:baseline;justify-content:space-between;padding:.9rem 1rem}
-.product-name{font-size:1.05rem;margin:0}
-.product-price{color:#a03a67;font-weight:700}
+.product-info{display:flex;align-items:baseline;justify-content:space-between;padding:1rem 1.1rem}
+.product-name{font-size:1.125rem;line-height:1.3;font-weight:600;color:var(--text-900);margin:0}
+.product-price{font-size:1.075rem;color:#8c2b5a;font-weight:700}
 .product-note{font-size:.9rem;color:var(--text-500);margin-left:auto}
 
 /* Photographic placeholders */
