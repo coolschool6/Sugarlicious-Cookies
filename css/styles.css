@@ -225,6 +225,16 @@ body{
   
   /* Stack side-by-side products on mobile */
   .product-row{grid-template-columns:1fr;gap:20px}
+  /* Disable original keyframe animations on mobile; use JS-driven reveal */
+  .product-card, .product-row{animation:none}
+  /* Mobile reveal animation states */
+  .mobile-animate{opacity:0;transform:translateY(18px) scale(.985);will-change:transform,opacity}
+  .mobile-animate.in-view{opacity:1;transform:translateY(0) scale(1);transition:opacity .6s cubic-bezier(.25,.6,.3,1),transform .6s cubic-bezier(.25,.6,.3,1)}
+}
+
+/* Reduced motion preference overrides (mobile) */
+@media (max-width:480px) and (prefers-reduced-motion: reduce){
+  .mobile-animate, .mobile-animate.in-view{opacity:1;transform:none;transition:none}
 }
 
 /* Notice chip */

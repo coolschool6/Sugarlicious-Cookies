@@ -276,6 +276,25 @@
 					closeLightbox();
 				}
 			});
+
+			// Mobile-only subtle scroll reveal animations
+			const enableMobileReveal = () => {
+				if (!window.matchMedia('(max-width:480px)').matches) return;
+				const targets = Array.from(document.querySelectorAll('.product-card, .product-row'));
+				if (!targets.length) return;
+				targets.forEach(el => el.classList.add('mobile-animate'));
+				const rootEl = document.querySelector('.viewport');
+				const observer = new IntersectionObserver((entries) => {
+					entries.forEach(entry => {
+						if (entry.isIntersecting) {
+							entry.target.classList.add('in-view');
+							observer.unobserve(entry.target);
+						}
+					});
+				},{threshold:0.2, root: rootEl});
+				targets.forEach(el => observer.observe(el));
+			};
+			document.addEventListener('DOMContentLoaded', enableMobileReveal);
 		</script>
 	</body>
 </html>
