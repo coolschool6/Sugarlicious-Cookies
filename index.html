@@ -24,9 +24,11 @@
 
 			<main id="content" class="viewport" tabindex="-1">
 				<header class="header">
+					<div class="brand-mark">
+						<img src="images/Logo.jpg" alt="Sugarlicious Cookies logo" loading="lazy" decoding="async" />
+					</div>
 					<h1 class="brand-title">Sugarlicious Cookies</h1>
 					<p class="tagline">Custom‑Crafted Delights</p>
-					<div class="notice" role="note">Minimum order: 10</div>
 				</header>
 
 				<section class="products" aria-label="Cookie products list">
@@ -35,11 +37,11 @@
 							<div class="product-img">
 								<img src="images/Pink Christmas.jpg" alt="Pink Christmas cookie gift box with festive iced sugar cookies" loading="lazy" decoding="async" />
 							</div>
+							<div class="product-info">
+								<h2 class="product-name">Pink Christmas</h2>
+								<div class="product-price">$100 per box</div>
+							</div>
 						</button>
-						<div class="product-info">
-							<h2 class="product-name">Pink Christmas</h2>
-							<div class="product-price">$100 per box</div>
-						</div>
 					</article>
 
 					<article class="product-card">
@@ -47,11 +49,11 @@
 							<div class="product-img">
 								<img src="images/Santa's Toy shop.jpg" alt="Santa’s Toy Shop themed sugar cookies arranged on a white plate" loading="lazy" decoding="async" />
 							</div>
+							<div class="product-info">
+								<h2 class="product-name">Santa’s Toy Shop</h2>
+								<div class="product-price">$70</div>
+							</div>
 						</button>
-						<div class="product-info">
-							<h2 class="product-name">Santa’s Toy Shop</h2>
-							<div class="product-price">$70</div>
-						</div>
 					</article>
 
 					<article class="product-card">
@@ -59,29 +61,28 @@
 							<div class="product-img">
 								<img src="images/Paint your Own Cookie.jpg" alt="Paint Your Own Cookies 5-pack with brush and palette" loading="lazy" decoding="async" />
 							</div>
+							<div class="product-info">
+								<h2 class="product-name">Paint Your Own Cookies</h2>
+								<div class="product-price">$100 (5 pack)</div>
+							</div>
 						</button>
-						<div class="product-info">
-							<h2 class="product-name">Paint Your Own Cookies</h2>
-							<div class="product-price">$100 (5 pack)</div>
-						</div>
 					</article>
 
 					<article class="product-card">
-						<button class="product-trigger" data-name="Personalized Gingerboy & Snowman" data-price="$155 (10)" data-img="images/Personalized Gingerboy and Snowman.jpg" aria-label="Zoom Personalized Gingerboy and Snowman">
+						<button class="product-trigger" data-name="Personalized Gingerboy & Snowman" data-price="$155 (10)" data-img="images/Personalized Gingerboy and Snowman.jpg" data-min="10" aria-label="Zoom Personalized Gingerboy and Snowman">
 							<div class="product-img">
 								<img src="images/Personalized Gingerboy and Snowman.jpg" alt="Personalized Gingerboy and Snowman sugar cookies set of ten" loading="lazy" decoding="async" />
 							</div>
+							<div class="product-info">
+								<h2 class="product-name">Personalized Gingerboy & Snowman</h2>
+								<div class="product-price">$155 (10)</div>
+								<div class="product-note">Minimum order: 10</div>
+							</div>
 						</button>
-						<div class="product-info">
-							<h2 class="product-name">Personalized Gingerboy & Snowman</h2>
-							<div class="product-price">$155 (10)</div>
-						</div>
 					</article>
 				</section>
 
-				<footer class="footer">
-					<p>Portfolio preview — inquiries via email or Instagram.</p>
-				</footer>
+                
 			</main>
 
 			<div class="scrollbar-hint" aria-hidden="true"></div>
@@ -98,6 +99,7 @@
 				<div class="lightbox-info">
 					<div class="lightbox-name" id="lightboxName">Product</div>
 					<div class="lightbox-price" id="lightboxPrice">$0/dozen</div>
+					<div class="lightbox-note" id="lightboxNote" hidden>Minimum order: 10</div>
 				</div>
 			</div>
 		</div>
@@ -106,10 +108,11 @@
 			const lightbox = document.getElementById('lightbox');
 			const phTarget = document.getElementById('lightboxPh');
 			const imgTarget = document.getElementById('lightboxImg');
+			const noteTarget = document.getElementById('lightboxNote');
 			const nameTarget = document.getElementById('lightboxName');
 			const priceTarget = document.getElementById('lightboxPrice');
 
-			const openLightbox = (name, price, phClass, imgSrc) => {
+			const openLightbox = (name, price, phClass, imgSrc, minOrder) => {
 				nameTarget.textContent = name;
 				priceTarget.textContent = price;
 				if (imgSrc) {
@@ -121,6 +124,12 @@
 					imgTarget.removeAttribute('src');
 					phTarget.removeAttribute('hidden');
 					phTarget.className = 'ph ' + phClass;
+				}
+				if (minOrder) {
+					noteTarget.textContent = `Minimum order: ${minOrder}`;
+					noteTarget.removeAttribute('hidden');
+				} else {
+					noteTarget.setAttribute('hidden','');
 				}
 				lightbox.removeAttribute('aria-hidden');
 				document.body.classList.add('no-scroll');
@@ -137,7 +146,8 @@
 					const price = trigger.getAttribute('data-price');
 					const ph = trigger.getAttribute('data-ph');
 					const img = trigger.getAttribute('data-img');
-					openLightbox(name, price, ph, img);
+					const minOrder = trigger.getAttribute('data-min');
+					openLightbox(name, price, ph, img, minOrder);
 				}
 				if (e.target.hasAttribute('data-close')) {
 					closeLightbox();
