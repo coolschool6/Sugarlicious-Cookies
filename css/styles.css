@@ -100,8 +100,11 @@ body{
 
 /* Dual-image product card layout */
 .product-images-row{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--card-border)}
-.product-images-row .product-img{min-height:240px;aspect-ratio:1/1}
+.product-images-row .product-img{min-height:240px;aspect-ratio:1/1;position:relative}
 .product-images-row .product-img img{width:100%;height:100%;object-fit:cover}
+
+/* Image labels */
+.image-label{position:absolute;bottom:8px;right:8px;background:rgba(255,255,255,0.9);color:var(--text-500);font-size:0.75rem;padding:4px 10px;border-radius:8px;font-weight:600;opacity:0.85;pointer-events:none}
 .product-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover)}
 
 /* Animation delays for cards and rows */
