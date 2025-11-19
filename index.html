@@ -16,17 +16,8 @@
 
 		<div class="scene-bg" aria-hidden="true"></div>
 		
-		<!-- Bokeh light orbs background -->
-		<div class="bokeh-container" aria-hidden="true">
-			<div class="bokeh-orb bokeh-1"></div>
-			<div class="bokeh-orb bokeh-2"></div>
-			<div class="bokeh-orb bokeh-3"></div>
-			<div class="bokeh-orb bokeh-4"></div>
-			<div class="bokeh-orb bokeh-5"></div>
-			<div class="bokeh-orb bokeh-6"></div>
-			<div class="bokeh-orb bokeh-7 bokeh-mobile-hidden"></div>
-			<div class="bokeh-orb bokeh-8 bokeh-mobile-hidden"></div>
-		</div>
+		<!-- Particle constellation background -->
+		<canvas id="constellation" class="constellation-canvas" aria-hidden="true"></canvas>
 
 		<div class="device-frame" role="region" aria-label="Sugarlicious Cookies portfolio">
 			<div class="device-topbar" aria-hidden="true">
@@ -494,6 +485,138 @@
 				updateFavoriteButtons();
 				handleDeepLink();
 			});
+
+			// Particle Constellation Background
+			(() => {
+				const canvas = document.getElementById('constellation');
+				if (!canvas) return;
+				
+				const ctx = canvas.getContext('2d');
+				let particles = [];
+				let animationId;
+				
+				// Mobile detection and particle count
+				const isMobile = window.innerWidth <= 480;
+				const particleCount = isMobile ? 30 : 60;
+				const connectionDistance = isMobile ? 120 : 150;
+				const moveSpeed = isMobile ? 0.3 : 0.5;
+				
+				// Check for reduced motion preference
+				const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+				
+				// Resize canvas
+				const resizeCanvas = () => {
+					canvas.width = window.innerWidth;
+					canvas.height = window.innerHeight;
+				};
+				
+				// Particle class with 3D coordinates
+				class Particle {
+					constructor() {
+						this.x = Math.random() * canvas.width;
+						this.y = Math.random() * canvas.height;
+						this.z = Math.random() * 100 - 50; // depth
+						this.vx = (Math.random() - 0.5) * moveSpeed;
+						this.vy = (Math.random() - 0.5) * moveSpeed;
+						this.vz = (Math.random() - 0.5) * 0.2;
+						this.radius = Math.random() * 2 + 1;
+					}
+					
+					update() {
+						if (prefersReducedMotion) return;
+						
+						this.x += this.vx;
+						this.y += this.vy;
+						this.z += this.vz;
+						
+						// Wrap around edges
+						if (this.x < 0) this.x = canvas.width;
+						if (this.x > canvas.width) this.x = 0;
+						if (this.y < 0) this.y = canvas.height;
+						if (this.y > canvas.height) this.y = 0;
+						if (this.z < -50) this.z = 50;
+						if (this.z > 50) this.z = -50;
+					}
+					
+					draw() {
+						const scale = 1 + (this.z / 100);
+						const alpha = 0.4 + (this.z / 200);
+						const size = this.radius * scale;
+						
+						ctx.beginPath();
+						ctx.arc(this.x, this.y, size, 0, Math.PI * 2);
+						ctx.fillStyle = `rgba(255, 110, 161, ${alpha})`;
+						ctx.fill();
+					}
+				}
+				
+				// Initialize particles
+				const init = () => {
+					resizeCanvas();
+					particles = [];
+					for (let i = 0; i < particleCount; i++) {
+						particles.push(new Particle());
+					}
+				};
+				
+				// Draw connections between nearby particles
+				const drawConnections = () => {
+					for (let i = 0; i < particles.length; i++) {
+						for (let j = i + 1; j < particles.length; j++) {
+							const dx = particles[i].x - particles[j].x;
+							const dy = particles[i].y - particles[j].y;
+							const dz = particles[i].z - particles[j].z;
+							const distance = Math.sqrt(dx * dx + dy * dy + dz * dz * 0.5);
+							
+							if (distance < connectionDistance) {
+								const opacity = (1 - distance / connectionDistance) * 0.3;
+								ctx.beginPath();
+								ctx.moveTo(particles[i].x, particles[i].y);
+								ctx.lineTo(particles[j].x, particles[j].y);
+								ctx.strokeStyle = `rgba(255, 182, 203, ${opacity})`;
+								ctx.lineWidth = 1;
+								ctx.stroke();
+							}
+						}
+					}
+				};
+				
+				// Animation loop
+				const animate = () => {
+					ctx.clearRect(0, 0, canvas.width, canvas.height);
+					
+					// Update and draw particles
+					particles.forEach(particle => {
+						particle.update();
+						particle.draw();
+					});
+					
+					// Draw connections
+					drawConnections();
+					
+					animationId = requestAnimationFrame(animate);
+				};
+				
+				// Handle window resize
+				window.addEventListener('resize', () => {
+					resizeCanvas();
+				});
+				
+				// Initialize and start animation
+				init();
+				if (!prefersReducedMotion) {
+					animate();
+				} else {
+					// Static constellation for reduced motion
+					particles.forEach(particle => particle.draw());
+					drawConnections();
+				}
+				
+				// Cleanup on page unload
+				window.addEventListener('beforeunload', () => {
+					if (animationId) cancelAnimationFrame(animationId);
+				});
+			})();
 		</script>
 	</body>
 </html>
